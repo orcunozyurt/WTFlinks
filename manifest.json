@@ -1,0 +1,59 @@
+{
+  "name": "WTFlinks",
+  "version": "2.0.0",
+  "description": "WTFlinks is a browser extension that helps you to see the contents of shared links in your social media feed.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "images/eye16.png",
+      "32": "images/eye32.png",
+      "48": "images/eye48.png",
+      "128": "images/eye128.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "content_scripts": [{
+      "all_frames": false,
+      "js": [
+        "js/jquery.js",
+        "js/content/twitter.js"
+      ],
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/content/facebook.js"
+      ],
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "images/eye16.png",
+    "32": "images/eye32.png",
+    "48": "images/eye48.png",
+    "128": "images/eye128.png"
+  },
+  "web_accessible_resources": [
+    "images/bloody_eye.png"
+  ],
+  "manifest_version": 2
+}

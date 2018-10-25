@@ -1,53 +1,44 @@
 const content_parser = function (node) {
 
-    const images = [...node.getElementsByClassName('mbs _6m6 _2cnj _5s6c')];
+    const feed_item = [...node.getElementsByClassName('_5pcr userContentWrapper')];
 
-    images.forEach(function (el) {
-        let links = el.getElementsByTagName('a');
-        let long_url_str = links[0].href
-        let long_url = new URL(long_url_str);
-        let short_url = long_url.searchParams.get("u");
-        console.log("SHORT_URL", short_url);
+    feed_item.forEach(function (item) {
+        let url = null;
+        const images = [...item.getElementsByClassName('mbs _6m6 _2cnj _5s6c')];
+        images.forEach(function (el) {
+            let links = el.getElementsByTagName('a');
+            let long_url_str = links[0].href
+            try {
+                let long_url = new URL(long_url_str);
+                let short_url = long_url.searchParams.get("u");
+                url = new URL(short_url)
+            } catch (error) {
+                console.log('ERROR', error + ' URL:  ' + url);
+                return;
+            }
+            console.log("SHORT_URL", url);
+        });
 
-        // var request = new XMLHttpRequest();
-        // request.onreadystatechange = function () {
-        //     if (request.readyState === 4) {
-        //         if (request.status === 200) {
-        //             var data = JSON.parse(request.responseText);
-        //             var clickbait = data.clickbaitiness;
-        //             if (clickbait < 60) {
-        //                 let html = "<ul style='position:absolute;top:30px;right:10px;padding:5px;font-size:12px;line-height:1.8;background-color:#2ecc71;color:#fff;border-radius:5px'>👍 Not Clickbait</ul>";
-        //                 el.insertAdjacentHTML('afterend', html);
-        //             }
-        //             else if (clickbait > 90) {
-        //                 let html = "<ul style='position:absolute;top:30px;right:10px;padding:5px;font-size:12px;line-height:1.8;background-color:#F27935;color:#fff;border-radius:5px'>💁 This is Clickbait</ul>";
-        //                 el.insertAdjacentHTML('afterend', html);
-        //             }
-        //             else {
-        //                 let html = "<ul style='position:absolute;top:30px;right:10px;padding:5px;font-size:12px;line-height:1.8;background-color:#e67e22;color:#fff;border-radius:5px'>👻 " + clickbait + "% clickbait</ul>";
-        //                 el.insertAdjacentHTML('afterend', html);
-        //             }
-        //         }
-        //     }
-        // };
+        if (url !== null && url !== undefined) {
+            const action_buttons = [...item.getElementsByClassName('_42nr _1mtp')];
+            action_buttons[0].insertAdjacentHTML('beforeend', ncb_button(url, url.hostname));
+        }
 
-        // request.open("GET", "https://clickbait-detector.herokuapp.com/detect?headline=" + link, true);
-        // request.send();
     });
 
 };
 
-const ncb_button = function (url, username) {
+const ncb_button = function (url, hostname) {
     var imgURL = chrome.extension.getURL("images/bloody_eye.png");
-    return `
-    <div class="ProfileTweet-action Ncb">
-        <button class="ProfileTweet-actionButton u-textUserColorHover js-actionButton ncb-button" data-original-content="${encodeURI(url) + " " + username}" type="button">
-        <div class="IconContainer js-tooltip" title="Show Content of URL">
+    return `<span class="_1mto">
+    <div class="_khz _4sz1 _4rw5 _3wv2">
+    <span class="ncb-button" data-original-content="${encodeURI(url) + " " + hostname}" role="button" tabindex="4">
+        <div class="IconContainer js-tooltip" title="${encodeURI(url) + " " + hostname}">
             <img src="` + imgURL + `" height="40" width="40"/>
-            <span class="u-hiddenVisually">Show Content of URL</span>
         </div>
-        </button>
-    </div>`;
+    </span>
+    </div>
+</span>`
 }
 
 const observer = new MutationObserver(function (mutations) {

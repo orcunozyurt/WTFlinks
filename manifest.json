@@ -1,7 +1,7 @@
 {
   "name": "WTFlinks",
   "version": "1.0.0",
-  "description": "WTFlinks is a browser extension that helps you to see the contents of shared links in your social media feed.",
+  "description": "Shows the content of the links without leaving the page. Works in Twitter and Facebook.",
   "permissions": [
     "activeTab",
     "tabs",

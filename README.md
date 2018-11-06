@@ -5,6 +5,6 @@ A lot of news agencies and other websites are trying to capture your attention w
 
 Check the first prototype here: https://chrome.google.com/webstore/detail/clickbaithunter/idhcecdmgemllphjnpflnnbioncpgkpp
 
-Planned to work best with Twitter, Facebook and Linkedin feeds.
+Planned to work best with Twitter and Facebook feeds.
 
 

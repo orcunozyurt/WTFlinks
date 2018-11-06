@@ -1,14 +1,16 @@
 const content_parser = function (node) {
     $('.stream-item').each(function (index) {
-        var username = $(this).find('.username').find('b').html();
-        var url = $(this).find('.tweet-text').find('a.twitter-timeline-link').attr('data-expanded-url');
+        let username = $(this).find('.username').find('b').html();
+        let url = $(this).find('.tweet-text').find('a.twitter-timeline-link').attr('data-expanded-url');
 
         if (url !== undefined && url !== "" && url !== null && url.includes("twitter.com") === false) {
 
             if ($(this).find('.Ncb').html() === undefined) {
-                $(this).find('.ProfileTweet-actionList').append(ncb_button(url, username));
+
+                $(this).find('.ProfileTweet-actionList').append(ncb_button(url));
+
                 chrome.runtime.sendMessage({
-                    message: "setlistener",
+                    message: "SETLISTENER",
                     content_url: url,
                     account: username
                 }, function (response) {});
@@ -18,12 +20,12 @@ const content_parser = function (node) {
     });
 }
 
-const ncb_button = function (url, username) {
+const ncb_button = function (url) {
     var imgURL = chrome.extension.getURL("images/bloody_eye.png");
     return `
     <div class="ProfileTweet-action Ncb">
-        <button class="ProfileTweet-actionButton u-textUserColorHover js-actionButton ncb-button" data-original-content="${encodeURI(url) + " " + username}" type="button">
-        <div class="IconContainer js-tooltip" title="Show Content of URL">
+        <button class="ProfileTweet-actionButton u-textUserColorHover js-actionButton wtf-button" data-original-content="${encodeURI(url)}" type="button">
+        <div class="IconContainer js-tooltip" title="${encodeURI(url)}">
             <img src="` + imgURL + `" height="40" width="40"/>
             <span class="u-hiddenVisually">Show Content of URL</span>
         </div>

@@ -13,27 +13,30 @@ const content_parser = function (node) {
                 let short_url = long_url.searchParams.get("u");
                 url = new URL(short_url)
             } catch (error) {
-                console.log('ERROR', error + ' URL:  ' + url);
                 return;
             }
-            console.log("SHORT_URL", url);
         });
 
         if (url !== null && url !== undefined) {
             const action_buttons = [...item.getElementsByClassName('_42nr _1mtp')];
-            action_buttons[0].insertAdjacentHTML('beforeend', ncb_button(url, url.hostname));
+            action_buttons[0].insertAdjacentHTML('beforeend', ncb_button(url));
+
+            chrome.runtime.sendMessage({
+                message: "SETLISTENER",
+                content_url: url
+            }, function (response) {});
         }
 
     });
 
 };
 
-const ncb_button = function (url, hostname) {
+const ncb_button = function (url) {
     var imgURL = chrome.extension.getURL("images/bloody_eye.png");
     return `<span class="_1mto">
     <div class="_khz _4sz1 _4rw5 _3wv2">
-    <span class="ncb-button" data-original-content="${encodeURI(url) + " " + hostname}" role="button" tabindex="4">
-        <div class="IconContainer js-tooltip" title="${encodeURI(url) + " " + hostname}">
+    <span class="wtf-button" data-original-content="${encodeURI(url)}" role="button" tabindex="4">
+        <div class="IconContainer js-tooltip" title="${encodeURI(url)}">
             <img src="` + imgURL + `" height="40" width="40"/>
         </div>
     </span>

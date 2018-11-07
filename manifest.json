@@ -1,6 +1,6 @@
 {
   "name": "WTFlinks",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "Shows the content of the links without leaving the page. Works in Twitter and Facebook.",
   "permissions": [
     "activeTab",

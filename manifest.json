@@ -16,10 +16,10 @@
   },
   "page_action": {
     "default_icon": {
-      "16": "images/eye16.png",
-      "32": "images/eye32.png",
-      "48": "images/eye48.png",
-      "128": "images/eye128.png"
+      "16": "images/icon-128px.png",
+      "32": "images/icon-32px.png",
+      "48": "images/icon-48px.png",
+      "128": "images/icon-128px.png"
     }
   },
   "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
@@ -47,13 +47,13 @@
     }
   ],
   "icons": {
-    "16": "images/eye16.png",
-    "32": "images/eye32.png",
-    "48": "images/eye48.png",
-    "128": "images/eye128.png"
+    "16": "images/icon-128px.png",
+    "32": "images/icon-32px.png",
+    "48": "images/icon-48px.png",
+    "128": "images/icon-128px.png"
   },
   "web_accessible_resources": [
-    "images/bloody_eye.png"
+    "images/icon-128px.png"
   ],
   "manifest_version": 2
 }

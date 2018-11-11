@@ -21,12 +21,12 @@ const content_parser = function (node) {
 }
 
 const ncb_button = function (url) {
-    var imgURL = chrome.extension.getURL("images/bloody_eye.png");
+    var imgURL = chrome.extension.getURL("images/icon-128px.png");
     return `
     <div class="ProfileTweet-action Ncb">
         <button class="ProfileTweet-actionButton u-textUserColorHover js-actionButton wtf-button" data-original-content="${encodeURI(url)}" type="button">
         <div class="IconContainer js-tooltip" title="${encodeURI(url)}">
-            <img src="` + imgURL + `" height="40" width="40"/>
+            <img src="` + imgURL + `" height="32" width="32"/>
             <span class="u-hiddenVisually">Show Content of URL</span>
         </div>
         </button>

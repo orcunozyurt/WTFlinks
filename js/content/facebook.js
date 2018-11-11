@@ -32,12 +32,12 @@ const content_parser = function (node) {
 };
 
 const ncb_button = function (url) {
-    var imgURL = chrome.extension.getURL("images/bloody_eye.png");
+    var imgURL = chrome.extension.getURL("images/icon-128px.png");
     return `<span class="_1mto">
     <div class="_khz _4sz1 _4rw5 _3wv2">
     <span class="wtf-button" data-original-content="${encodeURI(url)}" role="button" tabindex="4">
         <div class="IconContainer js-tooltip" title="${encodeURI(url)}">
-            <img src="` + imgURL + `" height="40" width="40"/>
+            <img src="` + imgURL + `" height="32" width="32"/>
         </div>
     </span>
     </div>
